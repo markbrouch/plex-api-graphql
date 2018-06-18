@@ -1,0 +1,9 @@
+{
+  "name": "plex-api-graphql",
+  "version": "0.0.0",
+  "description": "Unofficial Graphql Server for Plex API",
+  "main": "index.js",
+  "repository": "git@github.com:markbrouch/plex-api-graphql.git",
+  "author": "Mark Brouch <mark.brouch@gmail.com>",
+  "license": "MIT"
+}

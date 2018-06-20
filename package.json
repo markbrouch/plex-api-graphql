@@ -5,5 +5,28 @@
   "main": "index.js",
   "repository": "git@github.com:markbrouch/plex-api-graphql.git",
   "author": "Mark Brouch <mark.brouch@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon -x node examples/server.js",
+    "prettier": "prettier --write \"**/*.{js,md,graphql,json}\"",
+    "precommit": "precise-commits"
+  },
+  "dependencies": {
+    "graphql-yoga": "^1.14.8",
+    "isomorphic-unfetch": "^2.0.0",
+    "jsonwebtoken": "^8.3.0",
+    "uuid": "^3.2.1",
+    "xml2js": "^0.4.19"
+  },
+  "devDependencies": {
+    "express": "^4.16.3",
+    "husky": "^0.14.3",
+    "nodemon": "^1.17.5",
+    "precise-commits": "^1.0.2",
+    "prettier": "^1.13.5"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true
+  }
 }

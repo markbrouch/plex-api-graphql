@@ -1,0 +1,51 @@
+type Query {
+  authenticate(username: String!, password: String!): AuthPayload!
+  resources: [Device!]!
+}
+
+type AuthPayload {
+  user: User!
+  token: String!
+}
+
+type User {
+  id: Int!
+  uuid: String!
+  email: String!
+  joinedAt: String!
+  username: String!
+  title: String!
+  thumb: String!
+  hasPassword: Boolean!
+  authToken: String!
+}
+
+type Device {
+  name: String!
+  product: String
+  productVersion: String
+  platform: String
+  platformVersion: String
+  device: String
+  clientIdentifier: String
+  createdAt: String
+  lastSeenAt: String
+  provides: String
+  owned: Boolean
+  accessToken: String
+  publicAddress: String
+  httpsRequired: Boolean
+  synced: Boolean
+  relay: Boolean
+  publicAddressMatches: Boolean
+  presence: Boolean
+  connections: [Connection!]!
+}
+
+type Connection {
+  protocol: String
+  address: String
+  port: Int
+  uri: String
+  local: Boolean
+}

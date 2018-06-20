@@ -3,7 +3,7 @@ const { parseString } = require('xml2js')
 
 module.exports.parseBool = string => string && !!parseInt(string)
 
-module.exports.parseEpoch = string => new Date(parseInt(string) * 1e3)
+module.exports.parseEpoch = string => string && new Date(parseInt(string) * 1e3)
 
 module.exports.getHeaders = ctx => {
   const Authorization = ctx.request.get('Authorization')

@@ -1,6 +1,6 @@
 const fetch = require('isomorphic-unfetch')
 
-const { getHeaders, parseXml, parseBool } = require('../utils')
+const { getHeaders, parseXml, parseBool, parseEpoch } = require('../utils')
 
 async function getResources(ctx) {
   const response = await fetch('https://plex.tv/api/resources', {
@@ -19,8 +19,8 @@ async function getResources(ctx) {
       platformVersion: $.platformVersion,
       device: $.device,
       clientIdentifier: $.clientIdentifier,
-      createdAt: new Date(parseInt($.createdAt)),
-      lastSeenAt: new Date(parseInt($.lastSeenAt)),
+      createdAt: parseEpoch($.createdAt),
+      lastSeenAt: parseEpoch($.lastSeenAt),
       provides: $.provides,
       owned: parseBool($.owned),
       accessToken: $.accessToken,

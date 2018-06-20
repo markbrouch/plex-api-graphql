@@ -8,7 +8,7 @@ app.get('/', (req, res) => res.send('Hello World!'))
 app.use(
   '/api',
   plexGraphQLServer({
-    JWT_SECRET: 'supersecret;)',
+    jwtSecret: 'supersecret;)',
     playground: '/playground'
   })
 )

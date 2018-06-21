@@ -1,8 +1,9 @@
 type Query {
   authenticate(username: String!, password: String!): AuthPayload!
   resources: [Device!]!
-  sections(uri: String!): [Directory!]!
-  section(uri: String!, key: String!): [Directory!]!
+  sections(uri: String!): [Section!]!
+  section(uri: String!, index: Int!): [Directory!]!
+  directory(uri: String!): DirectoryContents!
 }
 
 type AuthPayload {
@@ -52,7 +53,7 @@ type Connection {
   local: Boolean
 }
 
-type Directory {
+type Section {
   allowSync: Boolean
   art: String
   composite: String
@@ -77,4 +78,92 @@ type Directory {
 type Location {
   id: Int
   path: String
+}
+
+type Directory {
+  key: String!
+  title: String!
+  uri: String!
+  secondary: Boolean
+  prompt: String
+}
+
+type DirectoryContents {
+  directories: [Directory!]!
+  videos: [Video!]!
+}
+
+type Video {
+  ratingKey: Int
+  key: String
+  parentRatingKey: Int
+  grandparentRatingKey: Int
+  studio: String
+  grandparentKey: String
+  parentKey: String
+  grandparentTitle: String
+  parentTitle: String
+  index: Int
+  parentIndex: Int
+  type: String
+  title: String
+  contentRating: String
+  summary: String
+  rating: Float
+  audienceRating: Float
+  viewCount: Int
+  lastViewedAt: String
+  year: Int
+  tagline: String
+  thumb: String
+  parentThumb: String
+  grandparentThumb: String
+  grandparentArt: String
+  art: String
+  grandparentTheme: String
+  duration: Int
+  originallyAvailableAt: String
+  addedAt: String
+  updatedAt: String
+  audienceRatingImage: String
+  chapterSource: String
+  primaryExtraKey: String
+  ratingImage: String
+  media: [Media!]!
+  genres: [String!]
+  directors: [String!]
+  writers: [String!]
+  countries: [String!]
+  roles: [String!]
+}
+
+type Media {
+  videoResolution: String
+  id: Int
+  duration: Int
+  bitrate: Int
+  width: Int
+  height: Int
+  aspectRatio: Float
+  audioChannels: Int
+  audioCodec: String
+  videoCodec: String
+  container: String
+  videoFrameRate: String
+  audioProfile: String
+  videoProfile: String
+  parts: [MediaPart!]!
+}
+
+type MediaPart {
+  id: Int
+  key: String
+  duration: Int
+  file: String
+  size: Float
+  audioProfile: String
+  container: String
+  has64bitOffsets: Boolean
+  optimizedForStreaming: Boolean
+  videoProfile: String
 }

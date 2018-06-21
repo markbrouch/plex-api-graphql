@@ -5,6 +5,16 @@ module.exports.parseBool = string => string && !!parseInt(string)
 
 module.exports.parseEpoch = string => string && new Date(parseInt(string) * 1e3)
 
+module.exports.parseXml = (xmlString, mapFn) =>
+  new Promise((resolve, reject) => {
+    parseString(xmlString, (err, result) => {
+      if (err) reject(err)
+      if (result.errors) reject(result.errors.error.join('\n'))
+
+      resolve(mapFn ? mapFn(result) : result)
+    })
+  })
+
 module.exports.getHeaders = ctx => {
   const Authorization = ctx.request.get('Authorization')
 
@@ -23,12 +33,8 @@ module.exports.getHeaders = ctx => {
   }
 }
 
-module.exports.parseXml = (xmlString, mapFn) =>
-  new Promise((resolve, reject) => {
-    parseString(xmlString, (err, result) => {
-      if (err) reject(err)
-      if (result.errors) reject(result.errors.error.join('\n'))
-
-      resolve(mapFn ? mapFn(result) : result)
-    })
-  })
+module.exports.ResponseError = class extends Error {
+  constructor({ status, statusText }) {
+    super(`${status} ${statusText}`)
+  }
+}

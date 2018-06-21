@@ -2,6 +2,7 @@ const querystring = require('querystring')
 const uuidv4 = require('uuid/v4')
 const jwt = require('jsonwebtoken')
 const fetch = require('isomorphic-unfetch')
+const { ResponseError } = require('../utils')
 
 async function getUser(ctx, credentials = {}) {
   const identifier = uuidv4()
@@ -17,6 +18,8 @@ async function getUser(ctx, credentials = {}) {
       'user[password]': credentials.password
     })
   })
+
+  if (!response.ok) throw new ResponseError(response)
 
   const {
     error,

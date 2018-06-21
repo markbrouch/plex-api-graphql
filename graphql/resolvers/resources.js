@@ -1,13 +1,19 @@
 const fetch = require('isomorphic-unfetch')
 
-const { getHeaders, parseXml, parseBool, parseEpoch } = require('../utils')
+const {
+  ResponseError,
+  getHeaders,
+  parseXml,
+  parseBool,
+  parseEpoch
+} = require('../utils')
 
 async function getResources(ctx) {
   const response = await fetch('https://plex.tv/api/resources', {
     headers: getHeaders(ctx)
   })
 
-  if (!response.ok) throw new Error(`${response.status} ${response.statusText}`)
+  if (!response.ok) throw new ResponseError(response)
 
   const xml = await response.text()
   return await parseXml(xml, obj =>

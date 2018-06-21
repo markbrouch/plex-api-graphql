@@ -8,6 +8,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon -x node examples/server.js",
+    "docs": "rimraf docs && graphdoc -s ./graphql/schema.graphql",
     "prettier": "prettier --write \"**/*.{js,md,graphql,json}\"",
     "precommit": "precise-commits"
   },
@@ -19,11 +20,17 @@
     "xml2js": "^0.4.19"
   },
   "devDependencies": {
+    "@2fd/graphdoc": "^2.4.0",
     "express": "^4.16.3",
     "husky": "^0.14.3",
     "nodemon": "^1.17.5",
     "precise-commits": "^1.0.2",
-    "prettier": "^1.13.5"
+    "prettier": "^1.13.5",
+    "rimraf": "^2.6.2"
+  },
+  "graphdoc": {
+    "output": "./docs",
+    "logo": "<a href=\"https://github.com/markbrouch/plex-api-graphql\" target=\"_blank\" style=\"display:block;padding:1rem 35%\"><img src=\"https://i.imgur.com/F28wFBk.png\" /></a>"
   },
   "prettier": {
     "semi": false,
